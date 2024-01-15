@@ -3,22 +3,26 @@ import math
 pygame.init()
 
 #Window Properties
-WIDTH, HEIGHT = (1000, 800)
+WIDTH, HEIGHT = (1200, 800)
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Solar System")
 
 #Colours
 WHITE = (255, 255, 255)
+ORANGE = (255, 204, 0)
 YELLOW = (255, 255, 0)
 BLUE = (100, 149, 237)
 RED = (188, 39, 50)
 DARK_GREY = (80, 78, 81)
 
+#Fonts
+FONT = pygame.font.SysFont("comicsans", 16)
+
 #Planet definitions
 class Planet:
     AU = (149.6e6 * 1000)
     G = (6.67428e-11)
-    SCALE = 250 / AU  # 1AU = 100pixels
+    SCALE = 250 / AU  # 1AU = 100pixels if 250
     TIMESTEP = 3600 * 24 # 1 day
 
     #Variables for each planet
@@ -36,7 +40,7 @@ class Planet:
         self.x_vel = 0
         self.y_vel = 0
 
-    #Draw the planets and orbits
+    #Draw the planets and orbits and distances
     def draw(self, win):
         # Inital Position
         x = self.x * self.SCALE + WIDTH / 2
@@ -50,11 +54,15 @@ class Planet:
                 x = x * self.SCALE + WIDTH / 2
                 y = y * self.SCALE + HEIGHT / 2
                 updated_points.append((x, y))
-
             pygame.draw.lines(win, self.colour, False, updated_points, 2)
 
         #Planet
         pygame.draw.circle(win, self.colour, (x, y), self.radius)
+
+        #Distances
+        if not self.sun:
+            distance_text = FONT.render(f"{round(self.distance_to_sun / 1000, 1)}km", 1, WHITE)
+            win.blit(distance_text, (x - distance_text.get_width() / 2, y - distance_text.get_height() / 2))
 
     #Calculating attraction
     def attraction(self, other):
@@ -106,7 +114,7 @@ def main():
     sun.sun = True
     mercury = Planet(-0.387 * Planet.AU, 0, 8, DARK_GREY, 3.30 * 10**23)
     mercury.y_vel = 47.4 * 1000
-    venus = Planet(-0.723 * Planet.AU, 0, 14, WHITE, 4.8685 * 10**24)
+    venus = Planet(-0.723 * Planet.AU, 0, 14, ORANGE, 4.8685 * 10**24)
     venus.y_vel = 35.02 * 1000
     earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
     earth.y_vel = 29.783 * 1000
@@ -133,6 +141,4 @@ def main():
 
         pygame.display.update()
     pygame.quit()
-
-
 main()
