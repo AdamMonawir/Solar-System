@@ -36,10 +36,24 @@ class Planet:
         self.x_vel = 0
         self.y_vel = 0
 
-    #Draw the planets
+    #Draw the planets and orbits
     def draw(self, win):
+        # Inital Position
         x = self.x * self.SCALE + WIDTH / 2
         y = self.y * self.SCALE + HEIGHT / 2
+
+        #Orbits
+        if len(self.orbit) > 2:
+            updated_points = []
+            for point in self.orbit:
+                x, y = point
+                x = x * self.SCALE + WIDTH / 2
+                y = y * self.SCALE + HEIGHT / 2
+                updated_points.append((x, y))
+
+            pygame.draw.lines(win, self.colour, False, updated_points, 2)
+
+        #Planet
         pygame.draw.circle(win, self.colour, (x, y), self.radius)
 
     #Calculating attraction
