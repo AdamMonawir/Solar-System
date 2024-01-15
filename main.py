@@ -6,6 +6,7 @@ pygame.init()
 WIDTH, HEIGHT = (1000, 800)
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Solar System")
+
 #Colours
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
@@ -50,13 +51,9 @@ def main():
     #Making Planets
     sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10**30)
     sun.sun = True
-
     mercury = Planet(-0.387 * Planet.AU, 0, 8, DARK_GREY, 3.30 * 10**23)
-
     venus = Planet(-0.723 * Planet.AU, 0, 14, WHITE, 4.8685 * 10**24)
-
     earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
-
     mars = Planet(-1.524 * Planet.AU, 0, 12, RED, 6.39 * 10**23)
 
     #planets to be drawn
