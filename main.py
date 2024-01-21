@@ -114,27 +114,29 @@ def main():
   #to be defined for loop
   clock = pygame.time.Clock()
 
-    #Making Planets
-    sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10**30)
-    sun.sun = True
-    mercury = Planet(-0.387 * Planet.AU, 0, 8, DARK_GREY, 3.30 * 10**23)
-    mercury.y_vel = 47.4 * 1000
-    venus = Planet(-0.723 * Planet.AU, 0, 14, ORANGE, 4.8685 * 10**24)
-    venus.y_vel = 35.02 * 1000
-    earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
-    earth.y_vel = 29.783 * 1000
-    mars = Planet(-1.524 * Planet.AU, 0, 12, RED, 6.39 * 10**23)
-    mars.y_vel = 24.077 * 1000
+  #Making Planets
+  sun = Planet(0, 0, 30, YELLOW, 1.98892 * 10**30)
+  sun.sun = True
+  mercury = Planet(-0.387 * Planet.AU, 0, 8, DARK_GREY, 3.30 * 10**23)
+  mercury.y_vel = 47.4 * 1000
+  venus = Planet(-0.723 * Planet.AU, 0, 14, ORANGE, 4.8685 * 10**24)
+  venus.y_vel = 35.02 * 1000
+  earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
+  earth.y_vel = 29.783 * 1000
+  moon = Planet(-1.002 * Planet.AU, 0, 4, WHITE, 4 * 10**22)
+  moon.x_vel = 30.783 * 1000
+  mars = Planet(-1.524 * Planet.AU, 0, 12, RED, 6.39 * 10**23)
+  mars.y_vel = 24.077 * 1000
   jupiter = Planet(-5.203 * Planet.AU, 0, 20, DARK_GREY, 1.898 * 10**27
   )
 
-    #planets to be drawn
-    planets = [sun, mercury, venus, earth, mars]
+  #planets to be drawn
+  planets = [sun, mercury, venus, earth, moon, mars, jupiter]
 
-    while run:
-        #updates per second
-        clock.tick(60)
-        WIN.fill((0, 0, 0))
+  while run:
+    #updates per second
+    clock.tick(60)
+    WIN.fill((0, 0, 0))
 
     #Will close when x is pressed
     for event in pygame.event.get():
