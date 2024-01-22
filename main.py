@@ -24,7 +24,7 @@ FONT = pygame.font.SysFont("comicsans", 16)
 class Planet:
   AU = (149.6e6 * 1000)
   G = (6.67428e-11)
-  SCALE = 250 / AU  # 1AU = 100pixels if 250
+  SCALE = 75 / AU  # 1AU = 100pixels if 250
   TIMESTEP = 3600 * 24  # 1 day
 
   #Variables for each planet
@@ -63,10 +63,8 @@ class Planet:
 
     #Distances
     if not self.sun:
-      distance_text = FONT.render(f"{round(self.distance_to_sun / 1000, 1)}km",
-                                  1, WHITE)
-      win.blit(distance_text, (x - distance_text.get_width() / 2,
-                               y - distance_text.get_height() / 2))
+      distance_text = FONT.render(f"{round(self.distance_to_sun / 1000, 1)}km", 1, WHITE)
+      win.blit(distance_text, (x - distance_text.get_width() / 2, y - distance_text.get_height() / 2))
 
   #Calculating attraction
   def attraction(self, other):
@@ -123,15 +121,17 @@ def main():
   venus.y_vel = 35.02 * 1000
   earth = Planet(-1 * Planet.AU, 0, 16, BLUE, 5.9742 * 10**24)
   earth.y_vel = 29.783 * 1000
-  moon = Planet(-1.002 * Planet.AU, 0, 4, WHITE, 4 * 10**22)
-  moon.x_vel = 30.783 * 1000
+  earth.x_vel = 0 * 1000
+  moon = Planet(-1.002593 * Planet.AU, 0, 4, WHITE, 4 * 10**22)
+  moon.y_vel = 29.022 * 1000 # 1.022 * 1000 earth is zero
+  moon.x_vel = 0 * 1000
   mars = Planet(-1.524 * Planet.AU, 0, 12, RED, 6.39 * 10**23)
   mars.y_vel = 24.077 * 1000
-  jupiter = Planet(-5.203 * Planet.AU, 0, 20, DARK_GREY, 1.898 * 10**27
-  )
+  jupiter = Planet(-5.203 * Planet.AU, 0, 20, DARK_GREY, 1.898 * 10**27)
+  jupiter.y_vel = 13.07 * 1000
 
   #planets to be drawn
-  planets = [sun, mercury, venus, earth, moon, mars, jupiter]
+  planets = [sun, mercury, venus, earth, mars, jupiter]
 
   while run:
     #updates per second
